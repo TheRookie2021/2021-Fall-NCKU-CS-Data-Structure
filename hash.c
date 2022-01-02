@@ -27,18 +27,23 @@ void print_hashtable(const Element* arr)
  
 void insert_hash(Element *arr, char* str)
 {
+    //here: do not consider overflow!
     //hash algo
     int sum;
     for(int i=0;i<strlen(str);i++){
         sum+=str[i];
     }
     int index=sum%MAX;
-    int max_iterate=MAX;
+
     //insert 
     while(arr[index].str[0] !='\0')
     {//while not null
-        if(max_iterate==0)
+        if(strcmp(arr[index].str,"nope")==0)
+        {
+            strcpy(arr[index].str,str);
+            printf("%s is inserted\n",arr[index].str);
             return;
+        }
         if(index!=MAX-1)
         {
             index++;
@@ -47,10 +52,9 @@ void insert_hash(Element *arr, char* str)
         {
             index=0;
         }
-        max_iterate--;
+       
     }
     strcpy(arr[index].str,str);
-    
     printf("%s is inserted\n",arr[index].str);
 }
 
@@ -63,15 +67,16 @@ int search_key_hash(Element *arr, char* str)
         sum+=str[i];
     }
     int index=sum%MAX;
-    int max_iterate=MAX;
+
     //Find it
-    while(strcmp(str,arr[index].str)!=0)//worst case: O(n)
+    while(arr[index].str[0]!='\0')//worst case: O(n)
     {//prob here: it take O(n) to know that str do not exist
-        if(max_iterate==0)
+        //fix
+        if(strcmp(str,arr[index].str)==0)
         {
-            printf(" data: %s do not exist in index\n",str);
-            return -1;
-        } 
+            printf("search key of str %s in index: %d\n",str,index);
+             return index;
+        }
         if (index != MAX - 1)
         {
             index++;
@@ -80,30 +85,22 @@ int search_key_hash(Element *arr, char* str)
         {
             index=0;
         }
-        max_iterate--;
     }
-    printf("search key of str %s in index: %d\n",str,index);
-    return index;
+    printf("%s do not exist\n",str);
+    return -1;
 }
 
-const char* search_str_hash(Element *arr,int key)
-{
-    if(arr[key].str[0]!='\0')
-        return arr[key].str;
-    else 
-        return NULL;
-}
 
 void delete_hash(Element *arr, char *str)
 {
     int key=search_key_hash(arr,str);
-    const char *exist_str=search_str_hash(arr,key);
-    if(exist_str==NULL) 
+    if(key==-1)
     {
         printf("%s do not exist\n",str);
         return;
     }
-    arr[key].str[0]='\0';
+    //arr[key].str[0]='\0';//nope
+    strcpy(arr[key].str,"nope");
     printf("%s is deleted\n",str);
 }
 
