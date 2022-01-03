@@ -8,7 +8,7 @@ typedef struct  element
     char str[MAX];
 }Element;
 
-
+int num_of_data=0;
 void init_hashtable(Element *arr){
 
     for(int i=0;i<MAX;i++)
@@ -27,13 +27,19 @@ void print_hashtable(const Element* arr)
  
 void insert_hash(Element *arr, char* str)
 {
-    //here: do not consider overflow!
+    if (num_of_data==MAX)
+    {
+        printf("hash table is full\n");
+        return;
+    }
+    
     //hash algo
     int sum;
     for(int i=0;i<strlen(str);i++){
         sum+=str[i];
     }
     int index=sum%MAX;
+    
 
     //insert 
     while(arr[index].str[0] !='\0')
@@ -42,6 +48,7 @@ void insert_hash(Element *arr, char* str)
         {
             strcpy(arr[index].str,str);
             printf("%s is inserted\n",arr[index].str);
+            num_of_data++;
             return;
         }
         if(index!=MAX-1)
@@ -55,6 +62,7 @@ void insert_hash(Element *arr, char* str)
        
     }
     strcpy(arr[index].str,str);
+    num_of_data++;
     printf("%s is inserted\n",arr[index].str);
 }
 
@@ -67,9 +75,9 @@ int search_key_hash(Element *arr, char* str)
         sum+=str[i];
     }
     int index=sum%MAX;
-
+    int max_iter=MAX;
     //Find it
-    while(arr[index].str[0]!='\0')//worst case: O(n)
+    while(arr[index].str[0]!='\0'&&max_iter>0)//worst case: O(n)
     {//prob here: it take O(n) to know that str do not exist
         //fix
         if(strcmp(str,arr[index].str)==0)
@@ -85,6 +93,7 @@ int search_key_hash(Element *arr, char* str)
         {
             index=0;
         }
+        max_iter--;
     }
     printf("%s do not exist\n",str);
     return -1;
@@ -102,6 +111,7 @@ void delete_hash(Element *arr, char *str)
     //arr[key].str[0]='\0';//nope
     strcpy(arr[key].str,"nope");
     printf("%s is deleted\n",str);
+    num_of_data--;
 }
 
 int main()
