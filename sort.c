@@ -126,65 +126,65 @@ void quick_sort(int **arr, int left_index, int right_index)
     //(expecialy looping variable)
 }
 
-void mergeing(int *arr, int *temp, int left_index, int right_index,int num_l,int num_r)
+void mergeing(int *arr, int left_index,int mid, int right_index)
 {
-    int num = num_l+num_r;
+    int num = right_index-left_index+1;
     int l_start = left_index;
-    int r_start = right_index;
+    int r_start = mid+1;
+    int r_end = right_index;
+    int temp[MAX];
+    for(int i=0;i<MAX;i++)
+        temp[i]=0;
 
-    for (int i = l_start; i < num;)
+    // notice !! upper bound is not num!!!!!
+    for (int i = left_index; i < right_index+1; i++)
     {
+        //if one of them is already done
+        if(l_start > mid)
+        {
+            temp[i] = arr[r_start++];
+            continue;
+        }
+        if (r_start > right_index)
+        {
+            temp[i] = arr[l_start++];
+            continue;
+        }
+
+        //if both of them are not done
         if (arr[l_start] <= arr[r_start])
         {
             temp[i] = arr[l_start++];
-            i++;
         }
         else
         {
             temp[i] = arr[r_start++];
-            i++;
         }
     }
-
-    for (int i = l_start; i < num; i++)
+    
+    printf("temp\n");
+    printarr(temp);
+    printf("arr\n");
+    printarr(arr);
+    for (int i = left_index; i < right_index+1; i++)
     {
         arr[i] = temp[i];
     }
+
+    printarr(arr);
 }
-int merge_breakdown(int *arr, int *temp, int left_index, int right_index, int num)
+
+void rmerge_sort(int *arr, int left_index, int right_index)
 {
-    if (left_index == right_index)
-    { // when there is only one entry
-        return left_index;
-    }
-    // recursively sort
-    // break down into one entry
-    int left;
-    int right;
-    
-    if (num % 2 == 0)
+    if(left_index<right_index)
     {
-        num /= 2;
-        left = merge_breakdown(arr, temp, left_index, (left_index + right_index) / 2, num);       // 0,4;0,1;0,0
-        right = merge_breakdown(arr, temp, (left_index + right_index) / 2 + 1, right_index, num); // 5,9;8,9;9,9
-        mergeing(arr, temp, left, right,num,num);
+        int mid_index = (right_index + left_index) / 2;
+        rmerge_sort(arr, left_index, mid_index);
+        rmerge_sort(arr, mid_index + 1, right_index);
+        mergeing(arr, left_index, mid_index, right_index);
+        //post order traversal
+
     }
-    else
-    {
-        num /= 2;
-        left = merge_breakdown(arr, temp, left_index, (left_index + right_index) / 2, num);           // 0,4;0,1;0,0
-        right = merge_breakdown(arr, temp, (left_index + right_index) / 2 + 1, right_index, num - 1); // 5,9;8,9;9,9
-        mergeing(arr, temp, left, right,num,num-1);
-    }
-    // merging
-    return left;
-}
-void merge_sort(int *arr, int left_index, int right_index)
-{
-    int temp[MAX];
-    for (int i = 0; i < MAX; i++)
-        temp[i] = 0;
-    merge_breakdown(arr, temp, 0, MAX - 1,MAX);
 }
 
 void heapify(int *arr, int top)
@@ -345,8 +345,10 @@ int main()
      printarr(arr);//why not the same as above heapified arr?
     */
     printarr(arr);
-    merge_sort(arr, 0, MAX - 1);
+    rmerge_sort(arr, 0, MAX - 1);
     printf("result\n");
     printarr(arr);
+   /*
+   */
     return 0;
 }
