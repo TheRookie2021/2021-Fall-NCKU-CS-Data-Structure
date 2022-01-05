@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include<math.h>
-#define MAX 10000
-
-void printarr(int *arr)
+#include <math.h>
+#define MAX 500
+void printarr(int *arr,int num)
 {
 
-    for (int i = 0; i < MAX; i++)
+    for (int i = 0; i < num; i++)
     {
         printf("%d ", arr[i]);
     }
@@ -32,11 +31,11 @@ void permute(int a[], int n)
     }
 }
 
-void insertion_sort(int *arr)
+void insertion_sort(int *arr,int num)
 {
     int j;
     int temp;
-    for (int i = 0; i < MAX; i++)
+    for (int i = 0; i < num; i++)
     {
         for (j = i - 1; j > -1; j--)
         {
@@ -174,7 +173,6 @@ void mergeing(int *arr, int left_index, int mid, int right_index)
     {
         arr[i] = temp[i];
     }
-
 }
 
 void rmerge_sort(int *arr, int left_index, int right_index)
@@ -363,30 +361,71 @@ int main()
     clock_t start, end;
     srand(time(NULL));
     // srand(10);
+    int test[10];
+    for (int i = 0; i < 10; i++)
+    {
+        test[i] = rand() % 100;
+    }
+    printf("check out correctness:");
+    printf("\nrandom arr\n");
+    printarr(test,10);
+    insertion_sort(test,10);
+    printf("after insertion sort\n");
+    printarr(test,10);
 
-    // int arr[MAX];
+    for (int i = 0; i < 10; i++)
+    {
+        test[i] = rand() % 100;
+    }
+    printf("\nrandom arr\n");
+    printarr(test,10);
+    printf("after quick sort\n");
+    quick_sort(test, 0, 9);
+    printarr(test,10);
+
+    for (int i = 0; i < 10; i++)
+    {
+        test[i] = rand() % 100;
+    }
+    printf("\nrandom arr\n");
+    printarr(test,10);
+    printf("after merge sort\n");
+    rmerge_sort(test, 0, 9);
+    printarr(test,10);
+
+    for (int i = 0; i < 10; i++)
+    {
+        test[i] = rand() % 100;
+    }
+    printf("\nrandom arr\n");
+    printarr(test,10);
+    printf("after heap sort\n");
+    heap_sort(test, 9);
+    printarr(test,10);
+
+    printf("\nlet n= %d\n",MAX);
     int arr[MAX]; // = malloc(MAX* sizeof(int)); // why ? what's different between int arr[]? isn't arr[] also a pointer?
     // ans: arr is always pass by reference!
-    printf("nlog(n)=%.2f\n",(double)MAX*(log(MAX)/log(2)));
-    printf("n*n=\t%d\n",MAX*MAX);
+    printf("nlog(n)=%.2f\n", (double)MAX * (log(MAX) / log(2)));
+    printf("n*n=\t%d\n", MAX * MAX);
     /*insertion sort*/
     for (int i = 0; i < MAX; i++)
     {
-        arr[i] = rand() %MAX;
+        arr[i] = rand() % MAX;
     }
     // printf("random arr\n");
     // printarr(arr);
     start = clock();
-    insertion_sort(arr);
+    insertion_sort(arr,MAX);
     end = clock();
     // printf("result\n");
     // printarr(arr);
     printf("insertion sort time:\t %f\n", (double)(end - start) / CLOCKS_PER_SEC);
-    
+
     /* quick sort*/
     for (int i = 0; i < MAX; i++)
     {
-        arr[i] = rand() %MAX;
+        arr[i] = rand() % MAX;
     }
     // printf("random arr\n");
     // printarr(arr);
@@ -396,11 +435,11 @@ int main()
     // printf("result\n");
     // printarr(arr);
     printf("quick sort time:\t %f\n", (double)(end - start) / CLOCKS_PER_SEC);
-    
+
     /*heap sort*/
     for (int i = 0; i < MAX; i++)
     {
-        arr[i] = rand() %MAX;
+        arr[i] = rand() % MAX;
     }
     // printf("random arr\n");
     // printarr(arr);
@@ -410,11 +449,11 @@ int main()
     // printf("result\n");
     // printarr(arr);
     printf("heap sort time: \t %f\n", (double)(end - start) / CLOCKS_PER_SEC);
-    
+
     /*merge sort*/
     for (int i = 0; i < MAX; i++)
     {
-        arr[i] = rand() %MAX;
+        arr[i] = rand() % MAX;
     }
     // printf("random arr\n");
     // printarr(arr);
