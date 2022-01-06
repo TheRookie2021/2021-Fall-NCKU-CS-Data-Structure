@@ -464,8 +464,7 @@ int main()
                 break;
             }
 
-           
-            /* quick sort
+             /* quick sort
             for (int i = 0; i < MAX; i++)
             {
                 arr[i] = i;
