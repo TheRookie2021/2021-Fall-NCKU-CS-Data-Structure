@@ -3,7 +3,7 @@
 #include <time.h>
 #include <math.h>
 #define MAX 5000
-void printarr(int *arr,int num)
+void printarr(int *arr, int num)
 {
 
     for (int i = 0; i < num; i++)
@@ -31,7 +31,7 @@ void permute(int a[], int n)
     }
 }
 
-void insertion_sort(int *arr,int num)
+void insertion_sort(int *arr, int num)
 {
     int j;
     int temp;
@@ -404,17 +404,17 @@ int main()
     heap_sort(test, 9);
     printarr(test,10);
     */
-//--------------------------------------------------------------------
-    int n[5]={500,1000,2000,3000,5000};
-    for(int trial=0;trial<5;trial++)
+    //--------------------------------------------------------------------
+    int n[5] = {500, 1000, 2000, 3000, 5000};
+    for (int trial = 0; trial < 5; trial++)
     {
 
         printf("let n= %d\n", n[trial]);
-        int *arr = malloc(n[trial]* sizeof(int)); // why ? what's different between int arr[]? isn't arr[] also a pointer?
+        int *arr = malloc(n[trial] * sizeof(int)); // why ? what's different between int arr[]? isn't arr[] also a pointer?
         // ans: arr is always pass by reference!
 
         double sum_insert = 0, sum_merge = 0;
-        int maxtimes = 100;
+        int maxtimes = 4;
         for (int time = 0; time < maxtimes; time++)
         {
             /*insertion sort*/
@@ -422,15 +422,49 @@ int main()
             {
                 arr[i] = n[trial] - i;
             }
-            start = clock();
-            insertion_sort(arr, n[trial]);
-            //quick_sort(arr, 0, MAX - 1);
-            //heap_sort(arr, MAX - 1);
-            //rmerge_sort(arr, 0, n[trial] - 1);
-            end = clock();
-           
-            sum_insert += (double)(end - start) / CLOCKS_PER_SEC;
+            switch (time)
+            {
+            case 0:
+                start = clock();
+                insertion_sort(arr, n[trial]);
+                end = clock();
+                
+            sum_insert = (double)(end - start) / CLOCKS_PER_SEC;
+            printf("insertion sort time:\t %f\n", sum_insert);
+                break;
 
+            case 1:
+                start = clock();
+                quick_sort(arr, 0, n[trial] - 1);
+                end = clock();
+                
+            sum_insert = (double)(end - start) / CLOCKS_PER_SEC;
+            printf("quick sort time:\t %f\n", sum_insert);
+                break;
+
+            case 2:
+                start = clock();
+                heap_sort(arr, n[trial] - 1);
+                end = clock();
+                
+            sum_insert = (double)(end - start) / CLOCKS_PER_SEC;
+            printf("heap sort time:\t %f\n", sum_insert);
+                break;
+
+            case 3:
+                start = clock();
+                rmerge_sort(arr, 0, n[trial] - 1);
+                end = clock();
+                
+            sum_insert = (double)(end - start) / CLOCKS_PER_SEC;
+            printf("merge sort time:\t %f\n", sum_insert);
+                break;
+
+            default:
+                break;
+            }
+
+           
             /* quick sort
             for (int i = 0; i < MAX; i++)
             {
@@ -463,7 +497,7 @@ int main()
             printf("heap sort time: \t %f\n", (double)(end - start) / CLOCKS_PER_SEC);
             */
 
-            /*merge sort*/
+            /*merge sort
             for (int i = 0; i < n[trial]; i += 2)
             {
                 if (i + 1 < n[trial])
@@ -485,10 +519,12 @@ int main()
             // printf("result\n");
             // printarr(arr);
             sum_merge += (double)(end - start) / CLOCKS_PER_SEC;
+            */
         }
-        printf("insertion sort time:\t %f\n", sum_insert / maxtimes);
-        printf("merge sort time:\t %f\n", sum_merge / maxtimes);
-        free(arr);
+
+           free(arr);
+        // printf("merge sort time:\t %f\n", sum_merge / maxtimes);
+        
     }
-        return 0;
-    }
+    return 0;
+}
