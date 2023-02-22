@@ -1,0 +1,14 @@
+left	 bheap
+0.000412 0.000556
+left	 bheap
+0.000368 0.000552
+left	 bheap
+0.000349 0.000521
+left	 bheap
+0.000352 0.000563
+left	 bheap
+0.000364 0.000556
+left	 bheap
+0.000354 0.000576
+left	 bheap
+0.000377 0.000557

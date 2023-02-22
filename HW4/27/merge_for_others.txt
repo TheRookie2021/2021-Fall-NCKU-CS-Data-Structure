@@ -1,0 +1,25 @@
+let n= 500
+insertion sort time:	 0.000641
+quick sort time:	 0.000096
+heap sort time:	 0.000064
+merge sort time:	 0.000052
+let n= 1000
+insertion sort time:	 0.002841
+quick sort time:	 0.000076
+heap sort time:	 0.000123
+merge sort time:	 0.000079
+let n= 2000
+insertion sort time:	 0.010745
+quick sort time:	 0.000163
+heap sort time:	 0.000228
+merge sort time:	 0.000165
+let n= 3000
+insertion sort time:	 0.023979
+quick sort time:	 0.000225
+heap sort time:	 0.000355
+merge sort time:	 0.000262
+let n= 5000
+insertion sort time:	 0.065627
+quick sort time:	 0.000381
+heap sort time:	 0.000588
+merge sort time:	 0.000433

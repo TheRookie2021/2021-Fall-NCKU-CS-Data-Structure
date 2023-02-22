@@ -1,0 +1,6 @@
+
+let n= 3000
+nlog(n)=34652.24
+n*n=	9000000
+insertion sort time:	 0.023095
+merge sort time:	 0.000236

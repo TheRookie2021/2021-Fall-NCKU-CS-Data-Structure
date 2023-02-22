@@ -1,0 +1,4 @@
+insertion sort time:	 0.005181
+quick sort time:	 0.000208
+heap sort time:	 0.000257
+merge sort time:	 0.000157

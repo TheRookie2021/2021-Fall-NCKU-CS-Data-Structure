@@ -1,0 +1,15 @@
+let n= 500
+insertion sort time:	 0.000708
+merge sort time:	 0.000041
+let n= 1000
+insertion sort time:	 0.002573
+merge sort time:	 0.000081
+let n= 2000
+insertion sort time:	 0.010271
+merge sort time:	 0.000177
+let n= 3000
+insertion sort time:	 0.023239
+merge sort time:	 0.000264
+let n= 5000
+insertion sort time:	 0.064764
+merge sort time:	 0.000457

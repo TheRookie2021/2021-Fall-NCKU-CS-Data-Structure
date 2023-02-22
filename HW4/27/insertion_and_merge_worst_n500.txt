@@ -1,0 +1,6 @@
+
+let n= 500
+nlog(n)=4482.89
+n*n=	250000
+insertion sort time:	 0.000729
+merge sort time:	 0.000036

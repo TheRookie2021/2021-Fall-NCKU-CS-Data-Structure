@@ -1,0 +1,29 @@
+ void insert(int n)
+    {
+        if (search(root, n))
+            return;
+
+        // insert like a BST
+        for (node *cur = root; cur != NULL;)
+        {
+            if (n > cur->key)
+            {
+                if (cur->right != NULL)
+                    cur = cur->right;
+                else
+                {
+                    cur->right = creat_node(n);
+                    break;
+                }
+            }
+            else if (n < cur->key)
+                if (cur->left != NULL)
+                    cur = cur->left;
+                else
+                {
+                    cur->left = creat_node(n);
+                    break;
+                }
+        }
+        
+    }

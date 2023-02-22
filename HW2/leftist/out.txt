@@ -1,0 +1,46 @@
+insert 1
+meld
+a root null
+insert 3
+meld
+minunion
+	rchild==NULL
+	lchild==NULL
+insert 85
+meld
+minunion
+	rchild==NULL
+insert 2
+meld
+minunion
+minunion
+	swap
+	rchild==NULL
+	lchild==NULL
+	left subset is shorter
+insert 7
+meld
+minunion
+minunion
+	rchild==NULL
+	lchild==NULL
+insert 11
+meld
+minunion
+minunion
+	rchild==NULL
+insert 22
+meld
+minunion
+minunion
+minunion
+	rchild==NULL
+	lchild==NULL
+	left subset is shorter
+	left subset is shorter
+insert 27
+meld
+minunion
+minunion
+	rchild==NULL
+1 2 2 2 

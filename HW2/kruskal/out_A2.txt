@@ -1,0 +1,17 @@
+
+edge:1 s:1 v:4
+edge:2 s:0 v:3
+edge:3 s:7 v:9
+edge:3 s:1 v:2
+edge:4 s:2 v:3
+edge:7 s:5 v:6
+edge:5 s:6 v:7
+edge:8 s:3 v:4
+edge:5 s:3 v:6
+edge:5 s:3 v:8
+edge:6 s:4 v:5
+edge:9 s:1 v:3
+edge:8 s:2 v:5
+edge:9 s:2 v:8
+edge:7 s:8 v:9
+34
